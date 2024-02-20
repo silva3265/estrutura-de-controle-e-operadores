@@ -6,20 +6,25 @@ public class ControlePesoAeronave {
 		Scanner entrada = new Scanner(System.in);
 
 		System.out.print("Peso máximo da aeronave: ");
-		int pesoMaximo = entrada.nextInt(); // Usuario Vai digitar o peso maximo
+		int pesoMaximo = entrada.nextInt();
 
 		int pesoTotalPassageiros = 0;
-		boolean incluirNovoPassageiro = true;
 
-		// while (true) { // o while é usado para repetir uma quantidade indefinida
-		while (pesoTotalPassageiros <= pesoMaximo && incluirNovoPassageiro) {
-			System.out.print("Peso do passageiro: "); 
+		while (true) {
+			System.out.print("Peso do passageiro: ");
 			int pesoPassageiro = entrada.nextInt();
+
+			if (pesoTotalPassageiros + pesoPassageiro > pesoMaximo) {
+				System.out.println("Não pôde incluir passageiro. Peso excederia o máximo.");
+				continue; // Vai continuar a operação
+			}
 
 			pesoTotalPassageiros += pesoPassageiro;
 
 			System.out.print("Incluir novo passageiro? ");
-			incluirNovoPassageiro = entrada.nextBoolean();
+			if (!entrada.nextBoolean()) {
+				break; //Interrompe a execução do laço
+			}
 		}
 
 		System.out.printf("Peso máximo da aeronave: %d kg%n", pesoMaximo);
